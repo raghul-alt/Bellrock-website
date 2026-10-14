@@ -1,0 +1,43 @@
+@import 'tailwindcss';
+
+@font-face { font-family: "Geist:Bold"; src: url("https://static.figma.com/font/Geist_wght__1") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Geist:Medium"; src: url("https://static.figma.com/font/Geist_wght__1") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Geist:Regular"; src: url("https://static.figma.com/font/Geist_wght__1") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Geist:SemiBold"; src: url("https://static.figma.com/font/Geist_wght__1") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter:Regular"; src: url("https://static.figma.com/font/Inter_1") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter:Semi Bold"; src: url("https://static.figma.com/font/Inter_1") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Young Serif:Regular"; src: url("https://static.figma.com/font/YoungSerif-Regular_1") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+
+html { scroll-behavior: smooth; }
+body { font-family: "Geist:Regular", system-ui, sans-serif; color: #12344d; }
+section[id] { scroll-margin-top: 100px; }
+.logo-navy { filter: brightness(0) saturate(100%) invert(16%) sepia(37%) saturate(1500%) hue-rotate(176deg) brightness(92%); }
+@keyframes hero-wipe { from { clip-path: inset(0 0 0 100%); } to { clip-path: inset(0 0 0 0); } }
+.hero-wipe { animation: hero-wipe 0.8s cubic-bezier(0.65, 0, 0.35, 1) both; }
+@media (prefers-reduced-motion: reduce) { .hero-wipe { animation-duration: 0.01s; } }
+
+/* Scroll reveal */
+.reveal { --ease: cubic-bezier(0.22, 1, 0.36, 1); transition: opacity 1s var(--ease), transform 1.1s var(--ease), filter 1s var(--ease); transition-delay: var(--reveal-delay, 0ms); will-change: opacity, transform; }
+.reveal-up { opacity: 0; transform: translateY(40px); }
+.reveal-fade { opacity: 0; }
+.reveal-blur { opacity: 0; transform: translateY(24px); filter: blur(10px); }
+.reveal-image::after { content: ""; position: absolute; inset: 0; z-index: 5; background: #fff; transform-origin: top; transition: transform 1.3s cubic-bezier(0.77, 0, 0.18, 1) 0.1s; pointer-events: none; }
+.reveal-image.is-visible::after { transform: scaleY(0); }
+.reveal-image > * { transform: scale(1.12); transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal.is-visible { opacity: 1; transform: none; filter: none; }
+.reveal-image.is-visible > * { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal-image::after { display: none; }
+  .reveal, .reveal-image > * { opacity: 1 !important; transform: none !important; filter: none !important; clip-path: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* Hero lighthouse: drawn in from base to lantern, like a blueprint being traced */
+@keyframes lighthouse-draw {
+  0% { clip-path: inset(100% 0 0 0); opacity: 0; filter: drop-shadow(0 0 0 rgba(255,255,255,0)); }
+  10% { opacity: 1; }
+  80% { filter: drop-shadow(0 0 6px rgba(255,255,255,0.55)); }
+  100% { clip-path: inset(0 0 0 0); opacity: 1; filter: drop-shadow(0 0 0 rgba(255,255,255,0)); }
+}
+.lighthouse-draw { animation: lighthouse-draw 2.6s cubic-bezier(0.65, 0, 0.35, 1) 0.6s both; }
+@media (prefers-reduced-motion: reduce) { .lighthouse-draw { animation: none; } }
